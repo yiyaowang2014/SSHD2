@@ -1,0 +1,5 @@
+#NOTE: This is an Aether internal implementation file, its format can be changed without prior notice.
+#Tue Feb 07 09:29:23 CST 2017
+ldap-client-api-0.1.jar>=
+ldap-client-api-0.1.jar>central=
+ldap-client-api-0.1.pom>central=

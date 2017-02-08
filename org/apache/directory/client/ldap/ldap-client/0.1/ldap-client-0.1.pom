@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+  
+  http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.apache.directory.project</groupId>
+    <artifactId>project</artifactId>
+    <version>17</version>
+  </parent>
+
+  <groupId>org.apache.directory.client.ldap</groupId>
+  <artifactId>ldap-client</artifactId>
+  <version>0.1</version>
+  <name>Apache Directory LDAP Client</name>
+  <inceptionYear>2009</inceptionYear>
+  <packaging>pom</packaging>
+
+  <properties>
+    <projectName>Apache Directory LDAP Client</projectName>
+    <distMgmtSiteUrl>scpexe://people.apache.org/www/directory.apache.org/apacheds/gen-docs/${version}/</distMgmtSiteUrl>
+
+    <!-- Set versions for depending projects -->
+    <org.apache.directory.shared.version>0.9.18-SNAPSHOT</org.apache.directory.shared.version>
+    <org.apache.directory.server.version>1.5.6-SNAPSHOT</org.apache.directory.server.version>
+    <skin.version>1.0.1</skin.version>
+    
+    <!-- Set version for other jars -->
+    <commons.io.version>1.4</commons.io.version>
+    <commons.pool.version>1.5.4</commons.pool.version>
+    <junit.version>4.7</junit.version>
+    <mina.core.version>2.0.0-RC1</mina.core.version>
+    <slf4j.log4j12.version>1.5.10</slf4j.log4j12.version>
+    <log4j.version>1.2.14</log4j.version>
+  </properties>
+
+  <url>http://directory.apache.org/apacheds/1.5</url>
+
+  <issueManagement>
+    <system>jira</system>
+    <url>http://issues.apache.org/jira/browse/DIRAPI</url>
+  </issueManagement>
+
+  <scm>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/directory/clients/ldap/tags/0.1</connection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/directory/clients/ldap/tags/0.1</developerConnection>
+    <url>http://svn.apache.org/viewvc/directory/clients/ldap/tags/0.1</url>
+  </scm>
+
+  <description>
+    LDAP Client
+  </description>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.apache.directory.shared</groupId>
+        <artifactId>shared-ldap</artifactId>
+        <version>0.9.18</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.directory.shared</groupId>
+        <artifactId>shared-cursor</artifactId>
+        <version>0.9.18</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.directory.shared</groupId>
+        <artifactId>shared-ldap-schema</artifactId>
+        <version>0.9.18</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.directory.shared</groupId>
+        <artifactId>shared-ldap-schema-manager</artifactId>
+        <version>0.9.18</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.directory.shared</groupId>
+        <artifactId>shared-ldap-schema-loader</artifactId>
+        <version>0.9.18</version>
+      </dependency>
+
+      <dependency>
+        <groupId>commons-pool</groupId>
+        <artifactId>commons-pool</artifactId>
+        <version>${commons.pool.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>${commons.io.version}</version>
+      </dependency>
+      
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+      </dependency>
+   
+      <dependency>
+        <groupId>org.apache.mina</groupId>
+        <artifactId>mina-core</artifactId>
+        <version>${mina.core.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-log4j12</artifactId>
+        <version>${slf4j.log4j12.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>log4j</groupId>
+        <artifactId>log4j</artifactId>
+        <version>${log4j.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <modules>
+    <module>ldap-client-api</module>
+    <!-- This module as been disabled because of a cyclic dependency with the 'apacheds' project -->
+    <!--<module>ldap-client-test</module>-->
+  </modules>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <excludes>
+            <exclude>**/Abstract*</exclude>
+            <exclude>**/*RegressionTest*</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+    </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>2.5</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>
+
